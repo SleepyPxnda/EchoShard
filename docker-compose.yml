@@ -1,0 +1,12 @@
+services:
+  database:
+    container_name: EchoShard-database
+    image: postgres:17.5-bookworm
+    ports:
+      - 5432:5432
+    volumes:
+      - D:\projects\databases\echoshard:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=echoshard
