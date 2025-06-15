@@ -1,6 +1,8 @@
 package de.cloudypanda.money.model.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
@@ -10,16 +12,20 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.io.Serializable;
 import java.util.UUID;
 
-@Table(value = "money",schema = "money")
+@Table(value = "transaction", schema = "money")
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class MoneyEntity implements Serializable, Persistable<Long> {
+public class TransactionEntity implements Serializable, Persistable<Long> {
     @Id
+    @Column("id")
     private Long id;
 
-    @Column("player_id")
-    private UUID playerId;
+    @Column("source_id")
+    private UUID sourceId;
+
+    @Column("target_id")
+    private UUID targetId;
 
     @Column("amount")
     private double amount;
@@ -32,7 +38,7 @@ public class MoneyEntity implements Serializable, Persistable<Long> {
         return isNew;
     }
 
-    public MoneyEntity() {
-        this.isNew = true;
+    public TransactionEntity() {
+        this.isNew = false;
     }
 }
